@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+	<title>5秒视频</title> 
+	<style>
+		#bg{
+			background-position:center;
+			background-repeat:no-repeat;
+			background-size:cover;
+			position:fixed;
+			top:0px;
+			left:0px;
+			width:100%;
+			height:100%;
+		}
+		#video{
+			top:0px;
+			left:0px;
+			width:100%;
+			height:100%;
+			animation:yin 10s linear 0s infinite normal none running;
+		}
+		@keyframes yin{
+			0%{opacity:1}
+			5%{opacity:0}
+			40%{opacity:0}
+			45%{opacity:1}
+			100%{opacity:1}
+		}
+		#L{opacity:0;font-weight:900;font-size:300%;}
+		#R{opacity:0;font-weight:900;font-size:300%;}
+		.L{top:0px;left:0px;position:absolute;}
+		.R{top:0px;right:0px;position:absolute;}
+		#R:hover {opacity:1;} /* 鼠标划过链接 */
+		#L:hover {opacity:1;} /* 鼠标划过链接 */
+		#time{
+		filter: invert(100%);
+		position: absolute;
+		font-size: 500%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+	#up_5s{
+		width:100%;
+		height:100%;
+		position:absolute;
+		animation:up_move 10s linear 0s infinite normal none running;
+	}
+	@keyframes up_move {
+            0%{top:-100%;right:0%;}  /*网格移动到显示区域的外面*/
+            2%{top:0%;right:0%;}
+			10%{top:0%;right:0%;}
+			12%{top:0%;right:100%;}
+			14%{top:100%;right:100%;}
+			16%{top:100%;right:0%;}
+			20%{top:100%;right:0%;}
+			22%{top:0%;right:0%;}
+			30%{top:0%;right:0%;}
+			32%{top:0%;right:-100%;}
+			34%{top:-100%;right:-100%;}
+			36%{top:-100%;right:0%;}
+			40%{top:-100%;right:0%;}
+			42%{top:0%;right:0%;}
+			48%{top:0%;right:0%;}
+			50%{top:0%;right:100%;}
+			100%{top:0%;right:100%;}
+        }
+	</style>
+	<script language=Javascript> 
+	color_bg="000000"
+	function run_color(){
+	var rgb=Math.floor(Math.random()*(2<<23)).toString(16);
+	color='#'+( "000000" + rgb ).substr( -6 );
+	var video = document.getElementById("video");
+	document.getElementById('video').style['animationPlayState'] = 'running';
+	document.getElementById('up_5s').style['animationPlayState'] = 'running';
+    video.play();
+	return color;
+	}
+	function time(){    //获得显示时间的div
+	time_txt = document.getElementById('time')
+	var now=new Date();//替换div内容 
+	var time_str=now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日<br/>"+now.getHours()+"时"+now.getMinutes()+"分"+now.getSeconds()+"秒";
+	time_txt.innerHTML = time_str;//等待一秒专钟后调用time方法，由于settimeout在time方法内，所以可以无限调用   
+	if ((now.getSeconds()%10)==0) {color_bg=run_color()}
+	document.getElementById('bg').style.backgroundColor=color_bg;
+	document.getElementById('up_5s').style.backgroundColor=color_bg;
+	time_txt.style.color=color_bg;
+	setTimeout(time,1000);  }
+	function main(){
+	document.getElementById('video').style['animationPlayState'] = 'paused';
+	document.getElementById('up_5s').style['animationPlayState'] = 'paused';
+	now=new Date();
+	setTimeout(time,(now.getSeconds()%10)*1000);
+	}
+	</script>
+</head>
+
+<body onload="main()">
+	<div id="bg">
+		<video id="video" src="http://www.ecymd.net/thcic/video/cn/00039.mp4" />您的浏览器不支持Video标签。</video>
+		<div id="up_5s"></div>
+		<b id="time">时间</b>
+	</div>
+	<div class="L" id="L" style="width:45%;height:100%;"><div class="L" style="background:#66ccff;">音乐名</div></div>
+	<div class="R" id="R" style="width:45%;height:100%;"><div class="R" style="background:#66ccff;">视频名</div></div>
+</body>
+</html>
