@@ -67,7 +67,7 @@
 	function audio_play(){
 		run_audio=randomNum(1,46);
 		myAudio = document.getElementById("audio");
-		myAudio.src ="https://www.ecymd.net/thcic/sound/cn/"+audio_id[run_audio]+".mp3"
+		myAudio.src ="mp3/"+audio_id[run_audio]+".mp3"
 		myAudio.addEventListener("ended",audio_play,false);
 		document.getElementById("audio").volume = 0.5;
 		document.getElementById("audio").play();
@@ -82,7 +82,7 @@
 		document.getElementById("video").play();
 		}
 		else{
-		document.getElementById("video").src="https://www.ecymd.net/thcic/video/cn/"+video_id[run_video]+".mp4"
+		document.getElementById("video").src="mp4/"+video_id[run_video]+".mp4"
 		document.getElementById("voide_txt").innerHTML = "视频："+video_name[run_video]+"<br/>"+"作者："+video_owner[run_video];
 		document.getElementById("bg").style.opacity=1;
 		rgb=Math.floor(Math.random()*(2<<23)).toString(16);
