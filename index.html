@@ -35,8 +35,8 @@
 		left: 50%;
 		top: 50%;
 		}
-		#L{opacity:0;font-weight:900;font-size:300%;}
-		#R{opacity:0;font-weight:900;font-size:300%;}
+		#L{opacity:0;font-weight:900;font-size:200%;}
+		#R{opacity:0;font-weight:900;font-size:200%;}
 		.L{top:0px;left:0px;position:absolute;}
 		.R{top:0px;right:0px;position:absolute;}
 		#R:hover {opacity:1;} /* 鼠标划过链接 */
@@ -71,7 +71,7 @@
 		myAudio.addEventListener("ended",audio_play,false);
 		document.getElementById("audio").volume = 0.5;
 		document.getElementById("audio").play();
-		document.getElementById("audio_txt").innerHTML = audio_name[run_audio]+"<br/>"+audio_owner[run_audio];
+		document.getElementById("audio_txt").innerHTML = "音乐："+audio_name[run_audio]+"<br/>"+"作者："+audio_owner[run_audio];
 	}
 	function run_color(){
 		bool=!bool;
@@ -83,7 +83,7 @@
 		}
 		else{
 		document.getElementById("video").src="https://www.ecymd.net/thcic/video/cn/"+video_id[run_video]+".mp4"
-		document.getElementById("voide_txt").innerHTML = video_name[run_video]+"<br/>"+video_owner[run_video];
+		document.getElementById("voide_txt").innerHTML = "视频："+video_name[run_video]+"<br/>"+"作者："+video_owner[run_video];
 		document.getElementById("bg").style.opacity=1;
 		rgb=Math.floor(Math.random()*(2<<23)).toString(16);
 		color_bg='#'+( "000000" + rgb ).substr( -6 );
