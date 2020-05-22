@@ -1,25 +1,39 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
 	<title>5秒视频</title> 
 	<style>
 		#bg{
-			background-position:center;
-			background-repeat:no-repeat;
-			background-size:cover;
-			position:fixed;
 			top:0px;
 			left:0px;
 			width:100%;
 			height:100%;
+			position: absolute;
 		}
 		#video{
 			top:0px;
 			left:0px;
 			width:100%;
 			height:100%;
+			position: absolute;
+		}
+		#audio{
+			bottom:0px;
+			left:0px;
+			position: absolute;
+		}
+		#up_5s{
+			width:100%;
+			height:100%;
+			position:absolute;
+		}
+		#time{
+		transform: translate(-50%,-50%);
+		position: absolute;
+		font-size: 500%;
+		left: 50%;
+		top: 50%;
 		}
 		#L{opacity:0;font-weight:900;font-size:300%;}
 		#R{opacity:0;font-weight:900;font-size:300%;}
@@ -27,35 +41,76 @@
 		.R{top:0px;right:0px;position:absolute;}
 		#R:hover {opacity:1;} /* 鼠标划过链接 */
 		#L:hover {opacity:1;} /* 鼠标划过链接 */
-		#time{
-		filter: invert(100%);
-		position: absolute;
-		font-size: 500%;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%,-50%);
-	}
 	</style>
 	<script language=Javascript> 
-	function time(){    //获得显示时间的div
-	time_txt = document.getElementById('time')
-	var now=new Date();//替换div内容 
-	var time_str=now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日<br/>"+now.getHours()+"时"+now.getMinutes()+"分"+now.getSeconds()+"秒";
-	var rgb=Math.floor(Math.random()*(2<<23)).toString(16)
-	time_txt.innerHTML = time_str;//等待一秒专钟后调用time方法，由于settimeout在time方法内，所以可以无限调用   
-	color_bg='#'+( "000000" + rgb ).substr( -6 );
+	audio_id=['00001','00002','00003','00004','00005','00006','00007','00008','00009','00011','00012','00013','00014','00015','00016','00017','00018','00019','00020','00021','00022','00023','00024','00025','00026','00027','00028','00029','00030','00031','00032','00033','00034','00035','00036','00037','00038','00039','00040','00041','00042','00043','00044','00045','00046','00047']
+	audio_name=['華歌封火','薄雲','Resonance','Kourou','Maristar','Silly Bird, Milky Fish','touhou opening','東方蝶戀談','Yakuzin Clock','漫遊舊戰場街道','Lovely Girl','方之循環 ~ Square Wave','Clean Sky(THC2EDIT)','ぬえちゃんの洞窟探検','Dream of Merry','faith mind','VALENTINE SPARK','反逆Dash','砕月同人曲','八音醉夢','華露積芳草','鬼灯のワルツ -Waltz of Physalis-','石道游步','魔法少女達の百年祭~TOHOCLOCK REMIX','Tic.tac.owen','Alice in café','No border on Sky Greenwich','小さな町の紅茶館','8bitended Ash - TOHOCLOCK ver','無何有の郷 ～ Deep Mountain','Innocent Treasures(tohoclock ver.)','380000[TOHOCLOCK ver.]','Dive (Instrumental)','Wander on the moon','寂の回廊 (THC Ver.)','瀟灑完美的時間','Clock of the desire','夜雀の時計','蓬萊夢','1 min`s teatime','從神社所見之月','LittlePrincess Tohoclock ver.','Madness','阿禮的孩子','春之冰精','永遠的滿月']
+	audio_owner=['風靈狼','風靈狼','風靈狼','Hachysu','TFON_Scarlet','Drzzm32','文件','疾風之勁草','午後の篠崎','Drzzm32','Vixx','Drzzm32','adaptor','adaptor','疾風之勁草','村瀬悠太','adaptor','Drzzm32','RainbowSuika','RainbowSuika','延静斋孙','uma','RainbowSuika','greatlmz123','Palon','fancydz','Eos Larhanerla','つんつん','solon','小米茶惡劣','fancydz','3H是LSNSN来着','hanachan','疾風之勁草','RY','9cirno','9cirno','9cirno','2204500','燬','SCV','RainbowSuika','Drzzm32','PiDove','PiDove','PiDove']
+	video_id=['00001','00002','00003','00004','00005','00006','00007','00008','00009','00010','00011','00012','00013','00014','00015','00016','00017','00018','00019','00020','00021','00022','00023','00024','00025','00026','00027','00028','00029','00030','00031','00032','00033','00034','00035','00036','00037','00038','00039','00040','00041','00043','00044','00045','00046','00047','00048','00051','00052','00053','00055','00057','00058','00059','00060','00061','00062','00063','00064','00065','00066','00067','00068','00069','00070','00071','00072','00073','00074','00075','00076','00077','00078','00079']
+	video_name=['源碼中的神秘少女、','廁所里的紅魔家','SWKTANK','幻想鄉的日夜交替-博麗神社','秘封活動記錄-序1','秘封活動記錄-序2','秘封活動記錄-序3','幻想鄉的日夜交替-紅魔館','幻想鄉的日夜交替-永遠亭','rm -rf','白玉樓的階梯','Fish','帽子さん','selector spread INCUBATOR','One Punch Miko','morning Reimu','⑨是最強的！！！','R＆Y','TEA','霧之湖的情人節','yukayuyu','路過的正邪','幻想定音鼓協奏曲UC','今天的大小姐也很可愛','魔理沙平地摔','刺客信條⑨','神玉','放長線釣大魚','摩托車的誘惑','秘封活動記錄-序4','秘封活動記錄-序5','秘封活動記錄-序6','阿空的核彈','白澤球Run~','姬海棠极','姉様','一磚一瓦幻想鄉','魔理沙和愛麗絲','真生活真punk！','射命丸メタモルフォーゼ','Halloween2015','Imperishable night','Ghostly Wind','Imperishable night 2','古明地一格漫畫','Awou','1+2=ok','時間倒流5秒','兔が我が敌を喰らう！！','竜神の剣を喰らえ','變大和變小','貓和老鼠','兔炮！！！','神靈廟太難了','大胃王比赛','鼓哥日常','神隱的犯人','LOVE~kira','天邪鬼的daisuke','爆肝','後宮王日常','Sukima Portal','小桶無聊地蕩鞦韆','姐姐的心願','一輪醬，用小拳拳捶我胸口吧？','幻想樂團','閃爍突襲','吃我壓路機！！！','幽幽子的表情運動','貓和老鼠','全人類的緋想天','彈幕天邪鬼','傅裡葉畫蓮梅莉1','傅裡葉畫蓮梅莉2']
+	video_owner=['301_Moved_Permanerily','白雪纹-bxw','椰子熊','幻凌_星羽','京都幻想劇團','京都幻想劇團','京都幻想劇團','幻凌_星羽','幻凌_星羽','Andy Lithia','幻凌_星羽','七海','FassQi','CC_SP12','Balloon','SaMa_Next2015','Turtrier','SaMa_Next2015','切肉君','HK','AugEtsix','AugEtsix','卡真','叫我小鳥好了','木羽熊藏','所罗门的小杜','ひょうのれん','AugEtsix','卡勒崴爾','京都幻想劇團','京都幻想劇團','京都幻想劇團','璇璇','-米斯蒂娅_萝蕾拉-','十字架与三棱锥','FassQi','SunnyMilk','claymore1998_','Turtrier','悪餓鬼','FassQi','사카모토','Funku','사카모토','千瓦時','Funku','抽君','詠歎高調','玊玉Flawed•Jade','白薯poi','玊玉Flawed•Jade','玊玉Flawed•Jade','白薯poi','Isevn','幻境界手書製作組','玊玉Flawed•Jade','白薯poi','FassQi','KS','補課bukey','Gloosetton','火喵','自殺P','閉戀之瞳的秦心','薄荷味Almond','Gloosetton','火喵','綠光','自殺P','AyEr','火把','輝坊主','錢包醬的心跳大冒險','錢包醬的心跳大冒險']
+	color_bg="000000";
+	bool=0;
+	function randomNum(minNum,maxNum){ 
+		switch(arguments.length){ 
+        case 1: 
+            return parseInt(Math.random()*minNum+1,10); 
+        break; 
+        case 2: 
+            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+        break; 
+            default: 
+                return 0; 
+            break; 
+		 } 
+	}	
+	function audio_play(){
+		run_audio=randomNum(1,46);
+		myAudio = document.getElementById("audio");
+		myAudio.src ="http://www.ecymd.net/thcic/sound/cn/"+audio_id[run_audio]+".mp3"
+		myAudio.addEventListener("ended",audio_play,false);
+		document.getElementById("audio").volume = 0.5;
+		document.getElementById("audio").play();
+		document.getElementById("audio_txt").innerHTML = audio_name[run_audio]+"<br/>"+audio_owner[run_audio];
+	}
+	function run_color(){
+		bool=!bool;
+		run_video=randomNum(1,74);
+		if(!location.search){document.getElementById("audio").play();}
+		if(bool){
+		document.getElementById("bg").style.opacity=0;
+		document.getElementById("video").play();
+		}
+		else{
+		document.getElementById("video").src="http://www.ecymd.net/thcic/video/cn/"+video_id[run_video]+".mp4"
+		document.getElementById("voide_txt").innerHTML = video_name[run_video]+"<br/>"+video_owner[run_video];
+		document.getElementById("bg").style.opacity=1;
+		rgb=Math.floor(Math.random()*(2<<23)).toString(16);
+		color_bg='#'+( "000000" + rgb ).substr( -6 );
+		}
+	}
+	function time(){now=new Date();
+	time_str=now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日<br/>"+now.getHours()+"时"+now.getMinutes()+"分"+now.getSeconds()+"秒";
+	if ((now.getSeconds()%5)==0) {run_color()}//五秒调用一次
+	document.getElementById('time').innerHTML = time_str;
 	document.getElementById('bg').style.backgroundColor=color_bg;
-	time_txt.style.color=color_bg;
-	setTimeout(time,1000);  }
+	document.getElementById('up_5s').style.backgroundColor=color_bg;
+	//document.getElementById('time').style.color=color_bg;
+	setTimeout(time,1000);  
+	}
+	function main(){now=new Date();setTimeout(time,(now.getSeconds()%10)*1000);audio_play();}
 	</script>
 </head>
 
-<body onload="time()">
+<body onload="main()">
+	<video id="video" src="" />您的浏览器不支持Video标签。</video>
 	<div id="bg">
-		<!--<video id="video" src="https://www.runoob.com/try/demo_source/movie.mp4" />您的浏览器不支持Video标签。</video>-->
+		<div id="up_5s"></div>
+		<b id="time">时间</b>
 	</div>
-	<div class="L" id="L" style="width:45%;height:100%;"><div class="L" style="background:#66ccff;">音乐名</div></div>
-	<div class="R" id="R" style="width:45%;height:100%;"><div class="R" style="background:#66ccff;">视频名</div></div>
-	<b id="time">时间</b>
+	<div class="L" id="L" style="width:45%;height:100%;">
+	<audio id="audio" controls="controls" preload autoplay="autoplay"></audio>
+	<div class="L" id="audio_txt" style="background:#66ccff;">音乐名</div></div>
+	<div class="R" id="R" style="width:45%;height:100%;"><div class="R" id="voide_txt" style="background:#66ccff;">视频名</div></div>
 </body>
 </html>
