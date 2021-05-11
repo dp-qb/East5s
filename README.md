@@ -5,7 +5,7 @@
 原作基于[（已经被放弃的）Flash](https://zhuanlan.zhihu.com/p/28127408)
 
 由于我啥都不会，现在只是个半成品。
-[演示](https://dp-qb.github.io/East5s/)
+[HTML测试](https://dp-qb.github.io/East5s/)
 
 ----
 # 接下来的目标： #
