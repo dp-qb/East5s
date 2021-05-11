@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="视频宽高">
+		<item>适应屏幕</item>
+		<item>原始大小</item>
+		<item>裁剪</item>
+		<item>拉伸</item>
+	</string-array>
+	<string-array name="时间文字颜色混合模式">
+		<item>覆盖</item>
+		<item>加深</item>
+		<item>变亮</item>
+		<item>叠加</item>
+		<item>透明</item>
+		<item>删除颜色</item>
+	</string-array>
+</resources> 

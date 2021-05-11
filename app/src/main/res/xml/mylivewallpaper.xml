@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:description="@string/动态壁纸的文字描述"
+    android:settingsActivity="com.east5s.SettingsActivity"
+    android:thumbnail="@drawable/ic_launcher"/>
+<!--
+description ：动态壁纸的文字描述
+thumbnail：动态壁纸的图片描述
+settingsActivity：动态壁纸的设置界面
+-->

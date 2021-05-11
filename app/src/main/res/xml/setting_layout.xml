@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="video_param"
+    android:title="设置">
+	<CheckBoxPreference
+        android:defaultValue="false"
+        android:key="时间与视频"
+        android:title="时间与视频"
+		android:summaryOff="五秒交替显示。"
+        android:summaryOn="同时显示。"
+	/>
+	<EditTextPreference
+		android:title="壁纸处于前台时的音量大小"
+		android:dialogTitle="小数取值范围0～1"
+		android:key="壁纸前台音量"
+		android:summary="请输入小数"  
+		android:digits="0123456789."   
+		android:inputType="number"
+    />
+	<EditTextPreference
+		android:title="壁纸处于后台时的音量大小"
+		android:dialogTitle="小数取值范围0～1"
+		android:key="壁纸后台音量"
+		android:summary="请输入小数"  
+		android:digits="0123456789."   
+		android:inputType="number"
+    />
+	<ListPreference
+        android:key="视频宽高"
+        android:title="视频宽高" 
+        android:defaultValue="适应屏幕"
+        android:dialogTitle="宽高"
+        android:entries="@array/视频宽高"
+        android:entryValues="@array/视频宽高">
+    </ListPreference>
+	<EditTextPreference
+		android:dialogTitle="请符合“SimpleDateFormat函数语法”"
+        android:defaultValue="HHmmss"
+		android:key="时间格式"
+		android:title="时间格式"
+    />
+	<EditTextPreference
+		android:title="时间文字大小"
+		android:dialogTitle="请输入正整数"
+		android:defaultValue="120"
+		android:key="时间文字大小"
+		android:summary="请输入正整数"  
+		android:digits="0123456789"   
+		android:inputType="number"
+    />
+	<EditTextPreference
+		android:dialogTitle="请输入16进制颜色值，默认为“#66CCFF”"
+		android:key="时间文字颜色"
+		android:title="时间文字颜色"
+		android:summary="请输入16进制颜色值，默认为“#66CCFF”"  
+		android:digits="0123456789ABCDEFabcdef#"
+    />
+	<ListPreference
+        android:key="时间文字颜色混合模式"
+        android:title="时间文字颜色混合模式" 
+        android:defaultValue="叠加"
+        android:dialogTitle="时间文字颜色混合模式"
+        android:entries="@array/时间文字颜色混合模式"
+        android:entryValues="@array/时间文字颜色混合模式">
+    </ListPreference>
+	<EditTextPreference
+		android:dialogTitle="请输入正整数默认为“30”如果GIF帧数低，那么这里调再高也没用。"
+		android:key="FPS"
+		android:defaultValue="30"
+		android:title="每秒绘制帧数"
+		android:summary="请输入正整数"  
+		android:digits="0123456789"   
+		android:inputType="number"
+    />
+
+	<EditTextPreference
+		android:title="背景色"
+		android:dialogTitle="请输入16进制颜色值，一行一个颜色"
+		android:key="背景色"
+		android:summary="每秒从这些颜色里随机挑选一个作为背景，不填就完全随机"
+		android:digits="0123456789ABCDEFabcdef#\n"
+    />
+
+	<EditTextPreference
+		android:dialogTitle="请确认给予了存储权限！"
+		android:defaultValue="/sdcard/Android/data/com.east5s/files/GIF"
+		android:key="视频路径"
+		android:title="视频路径"
+		android:summary="如果不想给存储权限，请手动把视频复制到“/sdcard/Android/data/com.east5s/files/GIF”目录下"
+    />
+	<EditTextPreference
+		android:dialogTitle="请确认给予了存储权限！\n存储路径例“/sdcard/Movies”"
+		android:defaultValue="/sdcard/Android/data/com.east5s/files/MP3"
+		android:key="音乐路径"
+		android:title="音乐路径"
+		android:summary="如果不想给存储权限，请手动把音乐复制到“/sdcard/Android/data/com.east5s/files/MP3”目录下"
+    />
+	<Preference
+		android:title="设置为壁纸"
+		android:key="key_ok" >
+	</Preference>
+	<Preference
+		android:title="关闭动态壁纸"
+		android:key="key_del"
+		android:summary="恢复默认壁纸">
+	</Preference>
+	<Preference
+		android:title="帮助"
+		android:key="key_help">
+		
+		<!--根据data自动选择最合适的应用-->
+		<intent android:action="android.intent.action.VIEW"
+			android:data="http://www.google.com"/>
+		
+		<!--
+		"http://www.google.com"     //浏览器(网址必须带http)
+		"tel:1232333"             //拨号程序
+		"geo:39.899533,116.036476"//打开地图定位
+		-->
+		<!--可以通过<extra>传附加信息getIntent().getStringExtra("reused_key") -->
+		<extra
+			android:name="key"
+			android:value="value"/>
+	</Preference>
+</PreferenceScreen>
+
