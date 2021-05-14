@@ -8,5 +8,9 @@
 [HTML测试](https://dp-qb.github.io/East5s/)
 
 ----
-# 接下来的目标： #
-1. 直接解析视频而不是使用GIF
+# 重点： #
+1. 启动前请先放入动画与音乐。
+2. 本软件不主动申请任何权限，请把动画和音乐放入指定目录。
+4. 动画目录：/sdcard/Android/data/com.east5s/files/GIF
+5. 音乐目录：/sdcard/Android/data/com.east5s/files/MP3
+6. 如果给了存储权限可以随便更改目录位置。
