@@ -1,4 +1,4 @@
-视频演示：<iframe src="//player.bilibili.com/player.html?aid=589122067&bvid=BV1sB4y1N7MY&cid=367397922&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+视频演示：[东方5S（安卓动态壁纸）](https://www.bilibili.com/video/BV1sB4y1N7MY)
 
 原作：[《TOHO CLOCK - 萃集5秒鐘的動畫，鐫刻幻想郷的時間》](http://tohoclock.sinaapp.com/beta/index.html)
 
